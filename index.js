@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(express.static("./public"));
 
 // ROUTES
+const users = [{ name: "jordan100", pro: "dev" }];
 app.get("/", (req, res) => {
   res.send("Node_Express Server Alive 🛩️");
 });
