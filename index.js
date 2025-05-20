@@ -14,9 +14,17 @@ app.use(express.json());
 app.use(express.static("./public"));
 
 // ROUTES
-const users = [{ name: "jordan100", pro: "dev" }];
+const users = [
+  { name: "jordan100", pro: "dev" },
+  { name: "iza100", pro: "rmt" },
+  { name: "lara100", pro: "rmt" },
+  { name: "kyla100", pro: "rmt" },
+];
 app.get("/", (req, res) => {
-  res.send("Node_Express Server Alive 🛩️");
+  res.json({
+    msg: "Node_Express Server Alive 🛩️🛩️🛩️🛩️🛩️🛩️🛩️🛩️🛩️🛩️",
+    data: users.slice(0),
+  });
 });
 
 app.use("/api/v1/auth", () => {});
