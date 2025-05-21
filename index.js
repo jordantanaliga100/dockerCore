@@ -16,9 +16,7 @@ app.use(express.static("./public"));
 // ROUTES
 const users = [
   { name: "jordan100", pro: "dev" },
-  { name: "iza100", pro: "rmt" },
-  { name: "lara100", pro: "rmt" },
-  { name: "kyla100", pro: "rmt" },
+  { name: "chris100", pro: "col" },
 ];
 app.get("/", (req, res) => {
   res.json({
