@@ -11,8 +11,7 @@ RUN npm install
 # After running npm install, copy all the packages (usually in the node_modules)
 COPY . ./
 
-# Explicitly add port
+# Explicitly add port FOR DOCUMENTATION ! 
 EXPOSE 5000
 
 CMD ["npm", "run", "dev"]
-

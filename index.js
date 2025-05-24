@@ -20,8 +20,8 @@ const users = [
 ];
 app.get("/", (req, res) => {
   res.json({
-    msg: "Node_Express Server Alive 🛩️🛩️🛩️",
-    data: users.slice(0),
+    msg: "Node_Express Server Alive 🛩️🛩️🛩️ !!!!",
+    data: users.slice(0, 2),
   });
 });
 
@@ -51,7 +51,7 @@ const start = async () => {
   try {
     await function () {};
     app.listen(port, () => {
-      console.log("Server started at " + port + " !!");
+      console.log("Server started at " + port + " !!!");
     });
   } catch (error) {
     console.log(error);
