@@ -1,18 +1,18 @@
-# Base image
+# Base Image 
 FROM node:20
 
-# Work dir
+# Working directory 
 WORKDIR /app
 
-# Copy the dependencies in the packages.json to the working directory 
+# Copy the dependencies (json files)
 COPY package*.json .
-# after copying the deps from packagesjson to work dir, it install it using the command
 RUN npm install
 
-# Copy all the files (for example the node_modules) -- the rest of the application code
-COPY . .
+# After running npm install, copy all the packages (usually in the node_modules)
+COPY . ./
 
-# Explicitly add port 
+# Explicitly add port
 EXPOSE 5000
 
 CMD ["npm", "run", "dev"]
+
