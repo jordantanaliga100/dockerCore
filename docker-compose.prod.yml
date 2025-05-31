@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  backend:
+    container_name: dan100-backend-prod
+    build:
+      args:
+        NODE_ENV: production
+    ports:
+      - "80:5000"
+    environment:
+      - NODE_ENV=production
+    command: npm run start

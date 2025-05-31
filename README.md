@@ -34,3 +34,10 @@ CMD ["npm", "run", "dev"]
    docker run --name jordan100-node-app-con -d -p 5000:5000
 3. #### Deleting container and volume associated with the container
    docker rm jordan100-node-app-con -fv
+
+### 2. USING THE docker-compose
+
+Note: with yml file, spacing matters
+
+1. #### docker-compose up -d --build
+2. #### docker-compose down -fv
