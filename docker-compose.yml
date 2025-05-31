@@ -2,7 +2,7 @@ version: "3.8"
 services:
   ## server
   backend:
-    container_name: "dan100-backend"
+    container_name: "dan100-server"
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,6 +11,16 @@ services:
     working_dir: /app
 
   ## database
-  db:
+  mongo:
     container_name: dan100-db
-    image: mongo
+    restart: always
+    image: mongodb/mongodb-community-server:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
