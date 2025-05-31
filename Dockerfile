@@ -5,13 +5,15 @@ FROM node:20
 WORKDIR /app
 
 # Copy the dependencies (json files)
-COPY package*.json .
+COPY package.json ./
 RUN npm install
 
 # After running npm install, copy all the packages (usually in the node_modules)
-COPY . ./
+COPY . .
 
 # Explicitly add port FOR DOCUMENTATION ! 
 EXPOSE 5000
 
 CMD ["npm", "run", "dev"]
+
+

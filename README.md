@@ -1,0 +1,34 @@
+### 1. USING THE DOCKERFILE
+
+##### Base Image
+
+FROM node:20
+
+##### Working directory
+
+WORKDIR /app
+
+##### Copy the dependencies (json files)
+
+COPY package\*.json .
+RUN npm install
+
+##### After running npm install, copy all the packages (usually in the node_modules)
+
+COPY . ./
+
+##### Explicitly add port FOR DOCUMENTATION !
+
+EXPOSE 5000
+
+##### Command inside the docker env
+
+CMD ["npm", "run", "dev"]
+
+##### CLI COMMAND
+
+1. #### Building a image
+   docker build -t jordan100/node-app-img .
+   docker images
+2. #### Running the container
+   docker run --name jordan100-node-app-con -d -p 5000:5000
