@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   backend:
     container_name: dan100-backend-prod
@@ -10,3 +9,6 @@ services:
     environment:
       - NODE_ENV=production
     command: npm run start
+
+volumes:
+  mongo-data:

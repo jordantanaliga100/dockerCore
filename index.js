@@ -1,6 +1,7 @@
 // IMPORTS
 const dotenv = require("dotenv");
 const express = require("express");
+const mongoose = require("mongoose");
 dotenv.config();
 // ENV CONFIG
 const envFile =
@@ -49,7 +50,9 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 5000;
 const start = async () => {
   try {
-    await function () {};
+    await mongoose
+      .connect("mongodb://root:secret@mongo:27017/?authSource=admin")
+      .then(() => console.log("Connected!"));
     app.listen(port, () => {
       console.log("Server started at " + port + " !!!");
     });

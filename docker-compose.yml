@@ -1,7 +1,6 @@
-version: "3.8"
 services:
   ## server
-  backend:
+  server:
     container_name: "dan100-server"
     build:
       context: .
@@ -14,7 +13,7 @@ services:
   mongo:
     container_name: dan100-db
     restart: always
-    image: mongodb/mongodb-community-server:latest
+    image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: secret
@@ -22,5 +21,6 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
 volumes:
   mongo-data:
