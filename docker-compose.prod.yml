@@ -1,14 +1,12 @@
 services:
-  backend:
-    container_name: dan100-backend-prod
-    build:
-      args:
-        NODE_ENV: production
+  app:
+    container_name: app-prod
     ports:
-      - "80:5000"
-    environment:
-      - NODE_ENV=production
-    command: npm run start
-
-volumes:
-  mongo-data:
+      - "80:${PORT}"
+    command: npm start
+    restart: always
+    env_file:
+      - .env.prod
+  mongo:
+    container_name: mongo-prod
+    restart: always

@@ -2,10 +2,17 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
+const {
+  MONGO_PASSWORD,
+  MONGO_USER,
+  MONGO_IP,
+  MONGO_PORT,
+} = require("./config/config");
+const postRouter = require("./routes/post.routes.js");
 dotenv.config();
 // ENV CONFIG
 const envFile =
-  process.env.NODE_ENV === "production" ? ".env.prod" : ".env.local";
+  process.env.NODE_ENV === "production" ? ".env.prod" : ".env.dev";
 dotenv.config({ path: envFile });
 console.log("Loaded " + envFile + ":");
 const app = express();
@@ -21,13 +28,14 @@ const users = [
 ];
 app.get("/", (req, res) => {
   res.json({
-    msg: "Node_Express Server Alive 🛩️🛩️🛩️🛩️🛩️🛩️🛩️🛩️🛩️🛩️",
+    msg: "Node_Express Server Alive 🛩️🛩️🛩️🛩️🛩️",
     data: users.slice(0, 2),
   });
 });
 
 app.use("/api/v1/auth", () => {});
-app.use("/api/v1/users", () => {});
+app.use("/api/v1/user", () => {});
+app.use("/api/v1/post", postRouter);
 
 // BOTTOM MIDDLEWARES
 app.use((req, res, next) => {
@@ -47,12 +55,22 @@ app.use((err, req, res, next) => {
 });
 
 // SERVER INSTANCE
+
+const connectWithRetry = async () => {
+  await mongoose
+    .connect(
+      // process.env.MONGO_URL
+      `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
+    )
+    .then(() => console.log("Connected!"))
+    .catch((e) => {
+      setTimeout(connectWithRetry, 3000);
+    });
+};
 const port = process.env.PORT || 5000;
 const start = async () => {
   try {
-    await mongoose
-      .connect("mongodb://root:secret@mongo:27017/?authSource=admin")
-      .then(() => console.log("Connected!"));
+    await connectWithRetry();
     app.listen(port, () => {
       console.log("Server started at " + port + " !!!");
     });

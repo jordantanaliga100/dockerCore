@@ -1,14 +1,18 @@
 services:
-  backend:
-    container_name: dan100-backend-dev
-    build:
-      args:
-        NODE_ENV: development
-    ports:
-      - "5000:5000"
+  app:
+    container_name: app-dev
+    restart: always
     volumes:
       - ./:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - .env
     command: npm run dev
+
+  mongo:
+    container_name: mongo-dev
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
