@@ -15,7 +15,7 @@ app.use(express.static("./public"));
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Node_Express Server Alive 🛩️🛩️🛩️");
+  res.send("Node_Express Server Alive 🛩️🛩️🛩️🛩️🛩️");
 });
 
 app.use("/api/v1/auth", () => {});
@@ -39,7 +39,7 @@ app.use((err, req, res, next) => {
 });
 
 // SERVER INSTANCE
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 const start = async () => {
   try {
     await function () {};

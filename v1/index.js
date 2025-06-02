@@ -7,7 +7,7 @@ const {
   MONGO_USER,
   MONGO_IP,
   MONGO_PORT,
-} = require("./config/config");
+} = require("./config/config.js");
 const postRouter = require("./routes/post.routes.js");
 dotenv.config();
 // ENV CONFIG
