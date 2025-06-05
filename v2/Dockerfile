@@ -16,7 +16,7 @@ COPY . .
 
 ENV PORT=8080
 
-EXPOSE ${PORT}
+EXPOSE $PORT
 
 CMD ["npm", "run", "dev"]
 

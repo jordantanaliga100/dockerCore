@@ -8,7 +8,6 @@ const envFile =
 dotenv.config({ path: envFile });
 console.log("Loaded " + envFile + ":");
 const app = express();
-
 // TOP MIDDLEWARES
 app.use(express.json());
 app.use(express.static("./public"));
@@ -39,10 +38,9 @@ app.use((err, req, res, next) => {
 });
 
 // SERVER INSTANCE
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 const start = async () => {
   try {
-    await function () {};
     app.listen(port, () => {
       console.log("Server started at " + port + " and connected to DB !!");
     });
