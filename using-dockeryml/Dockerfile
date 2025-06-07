@@ -11,7 +11,7 @@ ARG NODE_ENV
 RUN if [ "$NODE_ENV" = "development" ]; \
         then npm install; \
         else npm install --omit=dev; \
-        fi
+    fi
 
 # After running npm install, copy all the packages (usually in the node_modules)
 COPY . .
@@ -23,5 +23,4 @@ EXPOSE $PORT
 
 
 CMD ["npm", "run", "dev"]
-
 

@@ -28,7 +28,7 @@ const users = [
 ];
 app.get("/", (req, res) => {
   res.json({
-    msg: "Node_Express Server Alive 🛩️🛩️🛩️",
+    msg: "Node_Express Server Alive 🛩️",
     data: users.slice(0, 2),
   });
 });

@@ -47,3 +47,13 @@ Note: with yml file, spacing matters
 
 1. #### docker-compose up -d --build
 2. #### docker-compose down -fv
+
+Note: for standard and conventions. I seperate the dev and prod yml files. And the command to run is:
+
+## UP
+
+1. docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+
+## DOWN
+
+2. docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
