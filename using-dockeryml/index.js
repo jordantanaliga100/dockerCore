@@ -55,23 +55,27 @@ app.use((err, req, res, next) => {
 });
 
 // SERVER INSTANCE
+const DB_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
 
 const connectWithRetry = async () => {
-  await mongoose
-    .connect(
-      // process.env.MONGO_URL
-      `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
-    )
-    .then(() => console.log("Connected!"))
-    .catch((e) => {
-      setTimeout(connectWithRetry, 3000);
-    });
+  try {
+    await mongoose.connect(DB_URL);
+    console.log("✅ MongoDB connected!");
+  } catch (err) {
+    console.error(
+      "❌ MongoDB connection failed. Retrying in 3s...",
+      err.message
+    );
+    setTimeout(connectWithRetry, 3000);
+  }
 };
 const port = process.env.PORT || 5000;
 const start = async () => {
   try {
+    await connectWithRetry();
     app.listen(port, () => {
-      console.log("Server started at " + port + " !!!");
+      console.log("🚀 Server started at port", port);
+      console.log("🌱 Environment:", process.env.NODE_ENV);
     });
   } catch (error) {
     console.log(error);
