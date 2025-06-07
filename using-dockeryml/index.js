@@ -28,7 +28,7 @@ const users = [
 ];
 app.get("/", (req, res) => {
   res.json({
-    msg: "Node_Express Server Alive 🛩️🛩️🛩️🛩️🛩️",
+    msg: "Node_Express Server Alive 🛩️🛩️🛩️",
     data: users.slice(0, 2),
   });
 });
@@ -70,7 +70,6 @@ const connectWithRetry = async () => {
 const port = process.env.PORT || 5000;
 const start = async () => {
   try {
-    await connectWithRetry();
     app.listen(port, () => {
       console.log("Server started at " + port + " !!!");
     });
