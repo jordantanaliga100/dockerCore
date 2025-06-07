@@ -6,13 +6,21 @@ const {
   UPDATE_ITEM,
   DELETE_ITEM,
 } = require("../controllers/post.controllers");
+const authenticationMiddleware = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
 // MODE TWO
-router.route("/").get(GET_ALL_ITEMS).post(CREATE_ITEM);
+router
+  .route("/")
+  .get(authenticationMiddleware, GET_ALL_ITEMS)
+  .post(authenticationMiddleware, CREATE_ITEM);
 
-router.route("/:id").get(GET_ITEM_BY_ID).patch(UPDATE_ITEM).delete(DELETE_ITEM);
+router
+  .route("/:id")
+  .get(authenticationMiddleware, GET_ITEM_BY_ID)
+  .patch(authenticationMiddleware, UPDATE_ITEM)
+  .delete(authenticationMiddleware, DELETE_ITEM);
 
 // Export the router
 module.exports = router;

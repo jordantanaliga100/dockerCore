@@ -2,40 +2,60 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+
 const {
   MONGO_PASSWORD,
   MONGO_USER,
   MONGO_IP,
   MONGO_PORT,
+  SESSION_SECRET,
+  REDIS_URL,
+  REDIS_PORT,
 } = require("./config/config.js");
+const authRouter = require("./routes/user.routes.js");
 const postRouter = require("./routes/post.routes.js");
+const { RedisStore, redisClient } = require("./redis/redis.js");
+// const { RedisStore, redisClient } = require("./redis/redis.js");
+
 dotenv.config();
 // ENV CONFIG
 const envFile =
   process.env.NODE_ENV === "production" ? ".env.prod" : ".env.dev";
 dotenv.config({ path: envFile });
 console.log("Loaded " + envFile + ":");
+
 const app = express();
 
+// const { REDIS_PORT, REDIS_URL } = require("../config/config.js");
+
 // TOP MIDDLEWARES
+app.use(
+  session({
+    store: new RedisStore({ client: redisClient }),
+    secret: SESSION_SECRET,
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      maxAge: 30000,
+    },
+  })
+);
+
 app.use(express.json());
 app.use(express.static("./public"));
 
 // ROUTES
-const users = [
-  { name: "jordan100", pro: "dev" },
-  { name: "chris100", pro: "col" },
-];
+
 app.get("/", (req, res) => {
   res.json({
     msg: "Node_Express Server Alive 🛩️",
-    data: users.slice(0, 2),
   });
 });
 
-app.use("/api/v1/auth", () => {});
-app.use("/api/v1/user", () => {});
-app.use("/api/v1/post", postRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", () => {});
+app.use("/api/v1/posts", postRouter);
 
 // BOTTOM MIDDLEWARES
 app.use((req, res, next) => {
@@ -60,6 +80,8 @@ const DB_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PO
 const connectWithRetry = async () => {
   try {
     await mongoose.connect(DB_URL);
+    await redisClient.connect();
+
     console.log("✅ MongoDB connected!");
   } catch (err) {
     console.error(
