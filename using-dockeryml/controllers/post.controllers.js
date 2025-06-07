@@ -75,7 +75,7 @@ exports.DELETE_ITEM = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Item not found" });
     }
-    res.status(204).json({ success: true });
+    res.status(200).json({ success: true, message: "Deleted" });
   } catch (error) {
     res.status(500).json({
       success: false,

@@ -55,7 +55,7 @@ app.use((err, req, res, next) => {
 });
 
 // SERVER INSTANCE
-const DB_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+const DB_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/post?authSource=admin`;
 
 const connectWithRetry = async () => {
   try {
@@ -66,6 +66,7 @@ const connectWithRetry = async () => {
       "❌ MongoDB connection failed. Retrying in 3s...",
       err.message
     );
+
     setTimeout(connectWithRetry, 3000);
   }
 };
