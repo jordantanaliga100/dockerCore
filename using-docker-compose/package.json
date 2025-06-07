@@ -1,0 +1,25 @@
+{
+  "name": "node-docker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --legacy-watch index.js "
+  },
+  "author": "jordantanaliga100",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "connect-redis": "^8.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.15.1",
+    "redis": "^5.5.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: jordan100-backend
+    working_dir: /app
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - PORT=5000
+    # env_file:
+    #   - ./.env

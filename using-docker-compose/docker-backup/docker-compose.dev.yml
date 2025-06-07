@@ -1,0 +1,18 @@
+services:
+  app:
+    container_name: app-dev
+    restart: always
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    command: npm run dev
+
+  mongo:
+    container_name: mongo-dev
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret

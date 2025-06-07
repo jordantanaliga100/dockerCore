@@ -1,0 +1,16 @@
+# this is a base image for dev
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+  app:
+    container_name: app-PROD
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=production
+    environment:
+      - NODE_ENV=production
+    command: npm run start

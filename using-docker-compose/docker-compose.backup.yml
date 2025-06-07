@@ -1,0 +1,19 @@
+name: projectApp
+services:
+  app:
+    container_name: app-con
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=development
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    # environment:
+    #   - PORT=5000
+    #   - NODE_ENV=development

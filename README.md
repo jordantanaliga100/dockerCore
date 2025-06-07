@@ -57,3 +57,10 @@ Note: for standard and conventions. I seperate the dev and prod yml files. And t
 ## DOWN
 
 2. docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+
+### ADDING nginx for proxy and load balancing USING THE docker-compose
+
+### Run another instance of the app | app(is the name of the service) and then = 2 (for second instance)
+
+1. docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --scale app=2
+   Note: now after running this, you will have a 2 proxies listening for request in port 5000 that is map in port 80 (the default nginx port)

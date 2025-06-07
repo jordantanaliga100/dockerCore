@@ -1,0 +1,29 @@
+### Stage 1:
+
+  # Build a react app
+FROM node:18 as builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json (or yarn.lock)
+COPY package*.json ./
+
+ARG NODE_ENV 
+RUN if [ "$NODE_ENV" = "development" ]; \
+      then npm install; \
+      else npm ci --only=production;\
+    fi
+COPY . ./
+
+RUN npm run build
+
+### State 2:
+
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

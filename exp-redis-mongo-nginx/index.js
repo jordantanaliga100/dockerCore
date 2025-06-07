@@ -2,6 +2,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const session = require("express-session");
 
 const {
@@ -26,6 +27,8 @@ dotenv.config({ path: envFile });
 console.log("Loaded " + envFile + ":");
 
 const app = express();
+app.set("trust proxy", true);
+app.use(cors());
 
 // const { REDIS_PORT, REDIS_URL } = require("../config/config.js");
 
@@ -47,10 +50,12 @@ app.use(express.static("./public"));
 
 // ROUTES
 
-app.get("/", (req, res) => {
-  res.json({
-    msg: "Node_Express Server Alive 🛩️",
-  });
+app.get("/api/v1", (req, res) => {
+  console.log("yeah it ran");
+  res.send(`Handled by ${process.env.HOSTNAME}`);
+  // res.json({
+  //   msg: "Node_Express Server Alive 🛩️",
+  // });
 });
 
 app.use("/api/v1/auth", authRouter);
