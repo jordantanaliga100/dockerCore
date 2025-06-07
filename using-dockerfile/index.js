@@ -14,7 +14,7 @@ app.use(express.static("./public"));
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Node_Express Server Alive 🛩️🛩️🛩️🛩️🛩️");
+  res.send("Node_Express Server Alive 🛩️🛩️🛩️");
 });
 
 app.use("/api/v1/auth", () => {});
