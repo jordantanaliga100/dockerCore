@@ -1,15 +1,16 @@
-FROM node:20
+FROM node
 
 WORKDIR /app
 
-RUN npm install -g pnpm
-
-COPY package*.json ./
-
-RUN pnpm install
+COPY package*.json .
+RUN npm i
 
 COPY . .
 
+## EXPOSE [Port you mentioned in the vite.config file]
+
 EXPOSE 5173
 
-CMD ["pnpm", "run", "dev"]
+CMD ["npm", "run", "dev"]
+
+
