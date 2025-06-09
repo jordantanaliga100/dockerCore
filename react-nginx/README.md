@@ -41,3 +41,23 @@
    - docker build -t react-img .
 2. run
    - docker run -d --rm -p 3000:3000 -v %cd%:/app:ro --name react-con react-img
+
+# $Migrate to docker-compose
+
+### docker-compose.yaml:
+
+    services:
+      fe:
+        build: .
+        ports:
+          - "3000:3000"
+        volumes:
+          - ./src:/app/src
+        environment:
+          - VITE_APP_NAME=jordan_tanaliga_100
+          - VITE_APP_SAMPLE=iza_tejoso_100
+        # env_file:
+        #   - ./.env
+
+1. docker-compose up -d
+2. docker-compose down -v
