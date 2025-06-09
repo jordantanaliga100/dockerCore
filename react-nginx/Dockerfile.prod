@@ -1,0 +1,17 @@
+# State 1
+FROM node as builder
+WORKDIR /app
+RUN npm i -g pnpm
+COPY package*.json pnpm-lock.yaml* ./
+RUN pnpm install
+COPY . .
+COPY .env.prod .env.production
+ENV NODE_ENV=production
+RUN pnpm run build
+
+# State 2 
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
