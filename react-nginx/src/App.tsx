@@ -12,9 +12,8 @@ function App() {
           count is {count}
         </button>
       </div>
-      <h1>this is a test</h1>
+      <h1>{`Hello, ${import.meta.env.VITE_APP_NAME}`}</h1>
     </>
   );
 }
-
 export default App;
