@@ -1,0 +1,11 @@
+FROM node
+WORKDIR /app
+RUN npm i -g pnpm 
+COPY package*.json pnpm-lock.yaml* ./
+RUN pnpm install
+COPY . .
+## EXPOSE [Port you mentioned in the vite.config file]
+EXPOSE 3000
+CMD ["pnpm", "dev"]
+
+
