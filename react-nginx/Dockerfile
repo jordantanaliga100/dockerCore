@@ -11,3 +11,4 @@ ENV VITE_APP_NAME=jordan
 EXPOSE 3000
 
 CMD ["pnpm", "dev"]
+

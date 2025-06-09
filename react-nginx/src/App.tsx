@@ -12,7 +12,10 @@ function App() {
           count is {count}
         </button>
       </div>
-      <h1>{`Hello, ${import.meta.env.VITE_APP_NAME}`}</h1>
+      <h1>
+        {`Hello, ${import.meta.env.VITE_APP_NAME}`} and{" "}
+        {`${import.meta.env.VITE_APP_SAMPLE}`}
+      </h1>
     </>
   );
 }
